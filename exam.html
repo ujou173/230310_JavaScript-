@@ -51,9 +51,6 @@
     slideWrap.style.height = "30vh";
     console.dir(slideWrap);
 
-    
-
-
     // 배너 슬라이더, title 1종 + 멤버 별 소개 각 1종
     makeTag("div", "", "", slideWrap);
     makeTag("div", "", "", slideWrap);
@@ -100,16 +97,29 @@
     makeTag("p", titleTextObj.manager, "", slideWrap.children[0]);
 
     function makeSlide(num1, num2) {
-      makeTag("img", "", "", slideWrap.children[num1]);
+      makeTag("img", "", "", slideWrap.children[num1]); //makeTag(tagName, textContent, id, parent)
       slideWrap.children[num1].style.display = "flex";
     
       const memberPageImg = slideWrap.children[num1].children[0];
       memberPageImg.alt = `사진_${members[num2]["memberNumber"]}번_멤버`;
-      memberPageImg.style.border = "1px solid black";
-      memberPageImg.style.backgroundColor = "#ccc";
-      memberPageImg.style.display = "block";
-      memberPageImg.style.width = "300px";
-      memberPageImg.style.height = "100%";
+
+      const memberImgStyleObj = {
+        border: "1px solid black",
+        backgroundColor: "#ccc",
+        display: "block",
+        width: "300px",
+        height: "100%",
+      };
+
+      let getmemberImgStyle = [];
+      for(key in memberImgStyleObj) {
+        getmemberImgStyle.push(key);
+      }
+
+      for(let i = 0; i < getmemberImgStyle.length; i++) {
+        memberPageImg.style[getmemberImgStyle[i]] = memberImgStyleObj[getmemberImgStyle[i]];
+      }
+
     
       console.log(members[num2]["name"]);
       console.log(members[num2]["name"]);
