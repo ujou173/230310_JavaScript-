@@ -96,28 +96,30 @@
     makeTag("p", titleTextObj.story, "", slideWrap.children[0]);
     makeTag("p", titleTextObj.manager, "", slideWrap.children[0]);
 
+    // 슬라이드 멤버 이미지 부분 스타일링
+    const memberImgStyleObj = {
+      border: "1px solid black",
+      backgroundColor: "#ccc",
+      display: "block",
+      width: "300px",
+      height: "100%",
+    };
+
+    let getmemberImgStyle = [];
+    for(key in memberImgStyleObj) {
+      getmemberImgStyle.push(key);
+    }
+
+    // 슬라이드의 각 요소를 만드는 함수
     function makeSlide(num1, num2) {
       makeTag("img", "", "", slideWrap.children[num1]); //makeTag(tagName, textContent, id, parent)
       slideWrap.children[num1].style.display = "flex";
     
-      const memberPageImg = slideWrap.children[num1].children[0];
-      memberPageImg.alt = `사진_${members[num2]["memberNumber"]}번_멤버`; //img tag의 alt 속성값 지정
-
-      const memberImgStyleObj = {
-        border: "1px solid black",
-        backgroundColor: "#ccc",
-        display: "block",
-        width: "300px",
-        height: "100%",
-      };
-
-      let getmemberImgStyle = [];
-      for(key in memberImgStyleObj) {
-        getmemberImgStyle.push(key);
-      }
+      const memberSlideImg = slideWrap.children[num1].children[0];
+      memberSlideImg.alt = `사진_${members[num2]["memberNumber"]}번_멤버`; //img tag의 alt 속성값 지정
 
       for(let i = 0; i < getmemberImgStyle.length; i++) {
-        memberPageImg.style[getmemberImgStyle[i]] = memberImgStyleObj[getmemberImgStyle[i]];
+        memberSlideImg.style[getmemberImgStyle[i]] = memberImgStyleObj[getmemberImgStyle[i]];
       }
 
       console.log(members[num2]["name"]);
@@ -130,11 +132,12 @@
       slideWrap.children[num1].children[1].style.paddingLeft = "10px";
     }
 
+    // 반복문을 통한 슬라이드 요소 생성
     for(let i = 0; i < members.length; i++) {
       makeSlide(i+1, i);
     }
 
-    //슬라이더
+    //슬라이더 동작 함수
     let slideCount = slideWrap.children.length - 1;
     console.log(slideCount);
     setInterval(function() {
@@ -177,6 +180,7 @@
     makeTag("div", "", "", memberList);
     makeTag("div", "", "", memberList);
 
+    // 버튼 스타일을 모아둔 객체
     const btnObj = {
       width: "300px",
       height: "100px",
@@ -259,7 +263,6 @@
     for(let i = 0; i < trainingSubject.length; i++) {
       makeTag("li", trainingSubject[i], "", trainingList)
     }
-
 
   </script>
 </body>
