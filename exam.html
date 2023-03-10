@@ -123,8 +123,7 @@
         memberSlideImg.style[getmemberImgStyle[i]] = memberImgStyleObj[getmemberImgStyle[i]];
       }
 
-      console.log(members[num2]["name"]);
-      console.log(members[num2]["name"]);
+      // 설명 영역(div)을 추가하고 안에 텍스트(p)를 추가
       makeTag("div", "", "", slideWrap.children[num1]);
       makeTag("p", `${members[num2]["name"]} ${members[num2]["teamPosition"]}`, "", slideWrap.children[num1].children[1]);
       makeTag("p", `이메일 : ${members[num2]["emailAddress"]}`, "", slideWrap.children[num1].children[1]);
@@ -156,6 +155,7 @@
     makeTag("div", "", "memberList", root);
     const memberList = document.getElementById('memberList');
 
+    // 멤버 소개 영역 스타일링
     const memberListStyleObj = {
       border: "1px solid black",
       width: "100%",
@@ -174,6 +174,7 @@
       memberList.style[getMemberStyle[i]] = memberListStyleObj[getMemberStyle[i]];
     }
     
+    // 각 멤버 영역 요소 생성
     makeTag("div", "", "", memberList);
     makeTag("div", "", "", memberList);
     makeTag("div", "", "", memberList);
@@ -246,16 +247,19 @@
 
       // 버튼 클릭 시 모달창 생성
       memberList.children[i].children[1].addEventListener('click', function(){
+        // 모달창 영역 생성
         makeTag("div", "", "", root.children[1]);
+        // 모달창 스타일링
         for(let i = 0; i < getmodalStyle.length; i++) {
           root.children[1].children[5].style[getmodalStyle[i]] = modalClickBtn[getmodalStyle[i]];
         }
-        makeMemberList(root.children[1].children[5], i);
+        // 모달창 안의 자식 요소 생성 함수
+        modalCloseBtn(root.children[1].children[5], i);
       });
     }
 
-
-    function makeMemberList(parent, memberNum){
+    // 모달창 생성 함수
+    function modalCloseBtn(parent, memberNum){
       makeTag("button", "", "", parent);
       parent.children[0].textContent = "X";
       parent.children[0].style.position = "absolute";
@@ -274,18 +278,22 @@
       parent.children[1].style.paddingLeft = "10px";
     }
     
+    // 훈련과정 영역 요소 생성
     makeTag("ul", "", "trainingList", root);
     const trainingList = document.getElementById('trainingList');
-
+    // ul 스타일링
     trainingList.style.width = "100%";
     trainingList.style.height = "25vh";
     trainingList.style.border = "1px solid black";
+
     makeTag("li", "훈련 과정", "", trainingList);
     trainingList.children[0].style.fontSize = "1.5rem"
     trainingList.children[0].style.listStyle = "none"
     trainingList.children[0].style.marginLeft = "-20px"
 
+    // 훈련 과정 항목들의 개수만큼 요소를 생성
     for(let i = 0; i < trainingSubject.length; i++) {
+      // 훈련 과정 항목들의 데이터를 가져와서 요소를 만듦
       makeTag("li", trainingSubject[i], "", trainingList)
     }
 
