@@ -59,6 +59,7 @@
     makeTag("div", "", "", slideWrap);
     makeTag("div", "", "", slideWrap);
 
+    // 슬라이드의 스타일을 모아둔 객체
     const slideStyleObj = {
       position: "absolute",
       left: "0px",
@@ -69,18 +70,17 @@
       backgroundColor: "white",
       opacity: "0",
     };
-
+    // 슬라이드 스타일의 key 값을 배열로 받아옴
     let getSlideStyle = [];
     for(key in slideStyleObj) {
       getSlideStyle.push(key);
     }
-    console.log(getSlideStyle);
-
+    //반복문을 이용해 각 슬라이더에 객체로 작성해둔 스타일을 모두 적용
     for(let i = 0; i < slideWrap.children.length; i++) {
       for(let j = 0; j < getSlideStyle.length; j++) {
         slideWrap.children[i].style[getSlideStyle[j]] = slideStyleObj[getSlideStyle[j]];
       }
-      if(i === 0) {
+      if(i === 0) { // 예외적인 경우가 있어서 따로 적용
       slideWrap.children[i].style.opacity = "1";
       }
     }
@@ -101,7 +101,7 @@
       slideWrap.children[num1].style.display = "flex";
     
       const memberPageImg = slideWrap.children[num1].children[0];
-      memberPageImg.alt = `사진_${members[num2]["memberNumber"]}번_멤버`;
+      memberPageImg.alt = `사진_${members[num2]["memberNumber"]}번_멤버`; //img tag의 alt 속성값 지정
 
       const memberImgStyleObj = {
         border: "1px solid black",
@@ -120,7 +120,6 @@
         memberPageImg.style[getmemberImgStyle[i]] = memberImgStyleObj[getmemberImgStyle[i]];
       }
 
-    
       console.log(members[num2]["name"]);
       console.log(members[num2]["name"]);
       makeTag("div", "", "", slideWrap.children[num1]);
@@ -131,7 +130,6 @@
       slideWrap.children[num1].children[1].style.paddingLeft = "10px";
     }
 
-    // 각각 쓰면 되면서 반복문 돌리면 왜 안될까?
     for(let i = 0; i < members.length; i++) {
       makeSlide(i+1, i);
     }
@@ -179,12 +177,29 @@
     makeTag("div", "", "", memberList);
     makeTag("div", "", "", memberList);
 
+    const btnObj = {
+      width: "300px",
+      height: "100px",
+      border: "1px solid black",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      cursor: "pointer",
+    }
+
+    let btnStyle = [];
+    for(key in btnObj) {
+      btnStyle.push(key);
+    }
+
+    // 멤버 소개 리스트 부분 반복문으로 작성
     for(let i = 0; i < memberList.children.length; i++) {
       memberList.children[i].style.width = "300px";
       memberList.children[i].style.height = "350px";
       makeTag("img", "", "", memberList.children[i]);
       makeTag("div", "", "", memberList.children[i]);
 
+      // img태그 스타일링
       memberList.children[i].children[0].alt = members[i]["name"];
       memberList.children[i].children[0].style.display = "block";
       memberList.children[i].children[0].style.width = "300px";
@@ -192,13 +207,10 @@
       memberList.children[i].children[0].style.border = "1px solid black";
       memberList.children[i].children[0].style.backgroundColor = "#ccc";
 
-      memberList.children[i].children[1].style.width = "300px";
-      memberList.children[i].children[1].style.height = "100px";
-      memberList.children[i].children[1].style.border = "1px solid black";
-      memberList.children[i].children[1].style.display = "flex";
-      memberList.children[i].children[1].style.justifyContent = "center";
-      memberList.children[i].children[1].style.alignItems = "center";
-      memberList.children[i].children[1].style.cursor = "pointer";
+      // div(버튼) 태그 스타일링
+      for(let j = 0; j < btnStyle.length; j++) {
+        memberList.children[i].children[1].style[btnStyle[j]] = btnObj[btnStyle[j]];
+      }
       memberList.children[i].children[1].textContent = "Click";
 
       memberList.children[i].children[1].addEventListener('click', function(){
