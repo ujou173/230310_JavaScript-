@@ -214,12 +214,23 @@
     makeTag("div", "", "memberList", root);
     const memberList = document.getElementById('memberList');
 
-    memberList.style.border = "1px solid black";
-    memberList.style.width = "100%";
-    memberList.style.position = "relative";
-    memberList.style.display = "flex";
-    memberList.style.justifyContent = "space-between";
-    memberList.style.margin = "20px 0px"
+    const memberListStyleObj = {
+      border: "1px solid black",
+      width: "100%",
+      position: "relative",
+      display: "flex",
+      justifyContent: "space-between",
+      margin: "20px 0px",
+    }
+
+    let getMemberStyle = [];
+    for(key in memberListStyleObj) {
+      getMemberStyle.push(key);
+    }
+
+    for(let i = 0; i < getMemberStyle.length; i++) {
+      memberList.style[getMemberStyle[i]] = memberListStyleObj[getMemberStyle[i]];
+    }
     
     makeTag("div", "", "", memberList);
     makeTag("div", "", "", memberList);
