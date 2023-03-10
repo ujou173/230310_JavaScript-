@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{box-sizing: border-box;}
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="./source/modulefile.js"></script><!--변경하지 않을 것-->
+  <script>
+    const a = _EXAMDATA;
+    console.log(a); // 위 하이퍼링크된 js 파일 데이터
+    // 자유롭게 활용
+
+    // 브라우저 기본 마진 초기화
+    document.children[0].children[1].style.margin = "0px";
+
+    const root = document.getElementById('root');
+    root.style.width = "calc(100% - 5rem)";
+    root.style.height = "100vh";
+    root.style.margin = "auto";
+
+    // 너무 복잡해질 것을 대비해 미리 식별해둠
+    const teamInfo = _EXAMDATA["teamInformation"];
+    const members = teamInfo["teamAllMember"];
+    const training = _EXAMDATA["trainingInformation"];
+    const trainingSubject = training["subject"];
+    const colorSets = _EXAMDATA["designInformation"]["colorSet"];
+    const breakPoints = _EXAMDATA["designInformation"]["breakPoint"];
+    console.log(members);
+
+    // 태그 작성 함수
+    function makeTag(tagName, textValue, idValue, parent) {
+      const element = document.createElement(tagName);
+      element.textContent = textValue;
+      if(idValue !== "") {
+        element.id = idValue;
+      }
+      parent.appendChild(element);
+    }
+
+    // 슬라이더 wrapper
+    makeTag("div", "", "slideWrap", root)
+    const slideWrap = document.getElementById('slideWrap');
+    slideWrap.style.position = "relative";
+    slideWrap.style.width = "100%";
+    slideWrap.style.height = "30vh";
+    console.dir(slideWrap);
+
+    
+
+
+    // 배너 슬라이더, title 1종 + 멤버 별 소개 각 1종
+    makeTag("div", "", "", slideWrap);
+    makeTag("div", "", "", slideWrap);
+    makeTag("div", "", "", slideWrap);
+    makeTag("div", "", "", slideWrap);
+    makeTag("div", "", "", slideWrap);
+    makeTag("div", "", "", slideWrap);
+
+    console.log(slideWrap.children.length);
+    for(let i = 0; i < slideWrap.children.length; i++) {
+      slideWrap.children[i].style.position = "absolute";
+      slideWrap.children[i].style.left = "0px";
+      slideWrap.children[i].style.top = "0px";
+      slideWrap.children[i].style.width = "100%";
+      slideWrap.children[i].style.height = "100%";
+      slideWrap.children[i].style.border = "1px solid black";
+      slideWrap.children[i].style.backgroundColor = "white";
+      slideWrap.children[i].style.opacity = "0";
+      if(i === 0) {
+      slideWrap.children[i].style.opacity = "1";
+
+      }
+    }
+
+    // 함수화 시킬 것
+    // title 스타일
+    
+
+
+    const titleTextObj = {
+      title: `Project-C ${teamInfo.teamNumber}조 ${teamInfo.teamName}`,
+      manager: `팀장: ${teamInfo.teamManager}`,
+      story: teamInfo.teamNameStory,
+    }
+
+    makeTag("p", titleTextObj.title, "", slideWrap.children[0]);
+    makeTag("p", titleTextObj.story, "", slideWrap.children[0]);
+    makeTag("p", titleTextObj.manager, "", slideWrap.children[0]);
+
+    // 1번 멤버 - 팀장 류은이
+
+    makeTag("img", "", "", slideWrap.children[1]);
+    slideWrap.children[1].style.display = "flex";
+
+    const memberPageFirstImg = slideWrap.children[1].children[0];
+    memberPageFirstImg.alt = `사진_${members[0]["memberNumber"]}번_멤버`;
+    memberPageFirstImg.style.border = "1px solid black";
+    memberPageFirstImg.style.backgroundColor = "lightgray";
+    memberPageFirstImg.style.display = "block";
+    memberPageFirstImg.style.width = "300px";
+    memberPageFirstImg.style.height = "100%";
+
+    makeTag("div", "", "", slideWrap.children[1]);
+    makeTag("p", `${members[0]["name"]} ${members[0]["teamPosition"]}`, "", slideWrap.children[1].children[1]);
+    makeTag("p", `이메일 : ${members[0]["emailAddress"]}`, "", slideWrap.children[1].children[1]);
+    makeTag("p", `gitHub : ${members[0]["githubAddress"]}`, "", slideWrap.children[1].children[1]);
+    makeTag("p", `한마디 : ${members[0]["word"]}`, "", slideWrap.children[1].children[1]);
+    slideWrap.children[1].children[1].style.paddingLeft = "10px";
+
+    // 2번 멤버 - 팀원 김종윤
+
+    makeTag("img", "", "", slideWrap.children[2]);
+    slideWrap.children[2].style.display = "flex";
+
+    const memberPageSecondImg = slideWrap.children[2].children[0];
+    memberPageSecondImg.alt = `사진_${members[1]["memberNumber"]}번_멤버`;
+    memberPageSecondImg.style.border = "1px solid black";
+    memberPageSecondImg.style.backgroundColor = "lightgray";
+    memberPageSecondImg.style.display = "block";
+    memberPageSecondImg.style.width = "300px";
+    memberPageSecondImg.style.height = "100%";
+
+    makeTag("div", "", "", slideWrap.children[2]);
+    makeTag("p", `${members[1]["name"]} ${members[1]["teamPosition"]}`, "", slideWrap.children[2].children[1]);
+    makeTag("p", `이메일 : ${members[1]["emailAddress"]}`, "", slideWrap.children[2].children[1]);
+    makeTag("p", `gitHub : ${members[1]["githubAddress"]}`, "", slideWrap.children[2].children[1]);
+    makeTag("p", `한마디 : ${members[1]["word"]}`, "", slideWrap.children[2].children[1]);
+    slideWrap.children[2].children[1].style.paddingLeft = "10px";
+
+    // 3번 멤버 - 팀원 김지섭
+
+    makeTag("img", "", "", slideWrap.children[3]);
+    slideWrap.children[3].style.display = "flex";
+
+    const memberPageThirdImg = slideWrap.children[3].children[0];
+    memberPageThirdImg.alt = `사진_${members[2]["memberNumber"]}번_멤버`;
+    memberPageThirdImg.style.border = "1px solid black";
+    memberPageThirdImg.style.backgroundColor = "lightgray";
+    memberPageThirdImg.style.display = "block";
+    memberPageThirdImg.style.width = "300px";
+    memberPageThirdImg.style.height = "100%";
+
+    makeTag("div", "", "", slideWrap.children[3]);
+    makeTag("p", `${members[2]["name"]} ${members[2]["teamPosition"]}`, "", slideWrap.children[3].children[1]);
+    makeTag("p", `이메일 : ${members[2]["emailAddress"]}`, "", slideWrap.children[3].children[1]);
+    makeTag("p", `gitHub : ${members[2]["githubAddress"]}`, "", slideWrap.children[3].children[1]);
+    makeTag("p", `한마디 : ${members[2]["word"]}`, "", slideWrap.children[3].children[1]);
+    slideWrap.children[3].children[1].style.paddingLeft = "10px";
+
+    // 4번 멤버 - 팀원 김형진
+
+    makeTag("img", "", "", slideWrap.children[4]);
+    slideWrap.children[4].style.display = "flex";
+
+    const memberPageFourthImg = slideWrap.children[4].children[0];
+    memberPageFourthImg.alt = `사진_${members[3]["memberNumber"]}번_멤버`;
+    memberPageFourthImg.style.border = "1px solid black";
+    memberPageFourthImg.style.backgroundColor = "lightgray";
+    memberPageFourthImg.style.display = "block";
+    memberPageFourthImg.style.width = "300px";
+    memberPageFourthImg.style.height = "100%";
+
+    makeTag("div", "", "", slideWrap.children[4]);
+    makeTag("p", `${members[3]["name"]} ${members[3]["teamPosition"]}`, "", slideWrap.children[4].children[1]);
+    makeTag("p", `이메일 : ${members[3]["emailAddress"]}`, "", slideWrap.children[4].children[1]);
+    makeTag("p", `gitHub : ${members[3]["githubAddress"]}`, "", slideWrap.children[4].children[1]);
+    makeTag("p", `한마디 : ${members[3]["word"]}`, "", slideWrap.children[4].children[1]);
+    slideWrap.children[4].children[1].style.paddingLeft = "10px";
+    
+    // 5번 멤버 - 팀원 노수민
+
+    makeTag("img", "", "", slideWrap.children[5]);
+    slideWrap.children[5].style.display = "flex";
+
+    const memberPageFifthImg = slideWrap.children[5].children[0];
+    memberPageFifthImg.alt = `사진_${members[4]["memberNumber"]}번_멤버`;
+    memberPageFifthImg.style.border = "1px solid black";
+    memberPageFifthImg.style.backgroundColor = "lightgray";
+    memberPageFifthImg.style.display = "block";
+    memberPageFifthImg.style.width = "300px";
+    memberPageFifthImg.style.height = "100%";
+
+    makeTag("div", "", "", slideWrap.children[5]);
+    makeTag("p", `${members[4]["name"]} ${members[4]["teamPosition"]}`, "", slideWrap.children[5].children[1]);
+    makeTag("p", `이메일 : ${members[4]["emailAddress"]}`, "", slideWrap.children[5].children[1]);
+    makeTag("p", `gitHub : ${members[4]["githubAddress"]}`, "", slideWrap.children[5].children[1]);
+    makeTag("p", `한마디 : ${members[4]["word"]}`, "", slideWrap.children[5].children[1]);
+    slideWrap.children[5].children[1].style.paddingLeft = "10px";
+
+    //슬라이더
+    let slideCount = slideWrap.children.length - 1;
+    console.log(slideCount);
+    setInterval(function() {
+      for(let i = 0; i < slideWrap.children.length; i++) {
+          slideWrap.children[i].style.opacity = "0";
+          slideWrap.children[i].style.transition = "1s";
+      }
+      slideWrap.children[slideWrap.children.length - slideCount].style.opacity = "1";
+      slideCount = slideCount - 1;
+      if(slideCount === 0) {
+        slideCount = slideWrap.children.length;
+      }
+    }, 2000)
+
+    // 멤버 소개 란
+    makeTag("div", "", "memberList", root);
+    const memberList = document.getElementById('memberList');
+
+    memberList.style.border = "1px solid black";
+    memberList.style.width = "100%";
+    memberList.style.position = "relative";
+    memberList.style.display = "flex";
+    memberList.style.justifyContent = "space-between";
+    memberList.style.margin = "20px 0px"
+    
+    makeTag("div", "", "", memberList);
+    makeTag("div", "", "", memberList);
+    makeTag("div", "", "", memberList);
+    makeTag("div", "", "", memberList);
+    makeTag("div", "", "", memberList);
+
+    for(let i = 0; i < memberList.children.length; i++) {
+      memberList.children[i].style.width = "250px";
+      memberList.children[i].style.height = "350px";
+      makeTag("img", "", "", memberList.children[i]);
+      makeTag("div", "", "", memberList.children[i]);
+      memberList.children[i].children[0].alt = members[i]["name"];
+      memberList.children[i].children[0].style.display = "block";
+      memberList.children[i].children[0].style.width = "250px";
+      memberList.children[i].children[0].style.height = "250px";
+      memberList.children[i].children[0].style.border = "1px solid black";
+      memberList.children[i].children[0].style.backgroundColor = "lightgray";
+
+      memberList.children[i].children[1].style.width = "250px";
+      memberList.children[i].children[1].style.height = "100px";
+      memberList.children[i].children[1].style.border = "1px solid black";
+      memberList.children[i].children[1].style.display = "flex";
+      memberList.children[i].children[1].style.justifyContent = "center";
+      memberList.children[i].children[1].style.alignItems = "center";
+      memberList.children[i].children[1].style.cursor = "pointer";
+      memberList.children[i].children[1].textContent = "Click";
+
+      memberList.children[i].children[1].addEventListener('click', function(){
+        makeTag("div", "", "", root.children[1]);
+        root.children[1].children[5].style.backgroundColor = "white";
+        root.children[1].children[5].style.width = "100%";
+        root.children[1].children[5].style.height = "100%";
+        root.children[1].children[5].style.position = "absolute";
+        root.children[1].children[5].style.top = "0px";
+        root.children[1].children[5].style.left = "0px";
+      });
+    }
+
+    
+
+
+
+  </script>
+</body>
+</html>
