@@ -33,6 +33,7 @@
     const colorSets = _EXAMDATA["designInformation"]["colorSet"];
     const breakPoints = _EXAMDATA["designInformation"]["breakPoint"];
     console.log(members);
+    console.log(trainingSubject);
 
     // 태그 작성 함수
     function makeTag(tagName, textValue, idValue, parent) {
@@ -227,18 +228,18 @@
     makeTag("div", "", "", memberList);
 
     for(let i = 0; i < memberList.children.length; i++) {
-      memberList.children[i].style.width = "250px";
+      memberList.children[i].style.width = "300px";
       memberList.children[i].style.height = "350px";
       makeTag("img", "", "", memberList.children[i]);
       makeTag("div", "", "", memberList.children[i]);
       memberList.children[i].children[0].alt = members[i]["name"];
       memberList.children[i].children[0].style.display = "block";
-      memberList.children[i].children[0].style.width = "250px";
+      memberList.children[i].children[0].style.width = "300px";
       memberList.children[i].children[0].style.height = "250px";
       memberList.children[i].children[0].style.border = "1px solid black";
       memberList.children[i].children[0].style.backgroundColor = "#ccc";
 
-      memberList.children[i].children[1].style.width = "250px";
+      memberList.children[i].children[1].style.width = "300px";
       memberList.children[i].children[1].style.height = "100px";
       memberList.children[i].children[1].style.border = "1px solid black";
       memberList.children[i].children[1].style.display = "flex";
@@ -268,7 +269,6 @@
       parent.children[0].style.top = "5px";
       parent.children[0].style.right = "5px";
       parent.children[0].addEventListener('click', function(){
-        console.dir(this);
         this.parentElement.remove();
       })
   
@@ -280,7 +280,20 @@
       parent.children[1].style.paddingLeft = "10px";
     }
     
+    makeTag("ul", "", "trainingList", root);
+    const trainingList = document.getElementById('trainingList');
 
+    trainingList.style.width = "100%";
+    trainingList.style.height = "25vh";
+    trainingList.style.border = "1px solid black";
+    makeTag("li", "훈련 과정", "", trainingList);
+    trainingList.children[0].style.fontSize = "1.5rem"
+    trainingList.children[0].style.listStyle = "none"
+    trainingList.children[0].style.marginLeft = "-20px"
+
+    for(let i = 0; i < trainingSubject.length; i++) {
+      makeTag("li", trainingSubject[i], "", trainingList)
+    }
 
 
   </script>
