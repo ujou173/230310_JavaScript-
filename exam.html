@@ -250,8 +250,8 @@
         // 모달창 영역 생성
         makeTag("div", "", "", root.children[1]);
         // 모달창 스타일링
-        for(let i = 0; i < getmodalStyle.length; i++) {
-          root.children[1].children[5].style[getmodalStyle[i]] = modalClickBtn[getmodalStyle[i]];
+        for(let j = 0; j < getmodalStyle.length; j++) {
+          root.children[1].children[5].style[getmodalStyle[j]] = modalClickBtn[getmodalStyle[j]];
         }
         // 모달창 안의 자식 요소 생성 함수
         modalCloseBtn(root.children[1].children[5], i);
