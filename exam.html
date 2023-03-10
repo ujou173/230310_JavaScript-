@@ -260,17 +260,17 @@
       });
     }
 
+
     function makeMemberList(parent, memberNum){
-      makeTag("img", "", "", parent);
-      parent.style.display = "flex";
-  
-      // const memberPageFirstImg = parent.children[memberNum];
-      // memberPageFirstImg.alt = `사진_${members[0]["memberNumber"]}번_멤버`;
-      // memberPageFirstImg.style.border = "1px solid black";
-      // memberPageFirstImg.style.backgroundColor = "#ccc";
-      // memberPageFirstImg.style.display = "block";
-      // memberPageFirstImg.style.width = "300px";
-      // memberPageFirstImg.style.height = "100%";
+      makeTag("button", "", "", parent);
+      parent.children[0].textContent = "X";
+      parent.children[0].style.position = "absolute";
+      parent.children[0].style.top = "5px";
+      parent.children[0].style.right = "5px";
+      parent.children[0].addEventListener('click', function(){
+        console.dir(this);
+        this.parentElement.remove();
+      })
   
       makeTag("div", "", "", parent);
       makeTag("p", `${members[memberNum]["name"]} ${members[memberNum]["teamPosition"]}`, "", parent.children[1]);
