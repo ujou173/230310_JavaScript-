@@ -102,7 +102,7 @@
     const memberPageFirstImg = slideWrap.children[1].children[0];
     memberPageFirstImg.alt = `사진_${members[0]["memberNumber"]}번_멤버`;
     memberPageFirstImg.style.border = "1px solid black";
-    memberPageFirstImg.style.backgroundColor = "lightgray";
+    memberPageFirstImg.style.backgroundColor = "#ccc";
     memberPageFirstImg.style.display = "block";
     memberPageFirstImg.style.width = "300px";
     memberPageFirstImg.style.height = "100%";
@@ -122,7 +122,7 @@
     const memberPageSecondImg = slideWrap.children[2].children[0];
     memberPageSecondImg.alt = `사진_${members[1]["memberNumber"]}번_멤버`;
     memberPageSecondImg.style.border = "1px solid black";
-    memberPageSecondImg.style.backgroundColor = "lightgray";
+    memberPageSecondImg.style.backgroundColor = "#ccc";
     memberPageSecondImg.style.display = "block";
     memberPageSecondImg.style.width = "300px";
     memberPageSecondImg.style.height = "100%";
@@ -142,7 +142,7 @@
     const memberPageThirdImg = slideWrap.children[3].children[0];
     memberPageThirdImg.alt = `사진_${members[2]["memberNumber"]}번_멤버`;
     memberPageThirdImg.style.border = "1px solid black";
-    memberPageThirdImg.style.backgroundColor = "lightgray";
+    memberPageThirdImg.style.backgroundColor = "#ccc";
     memberPageThirdImg.style.display = "block";
     memberPageThirdImg.style.width = "300px";
     memberPageThirdImg.style.height = "100%";
@@ -162,7 +162,7 @@
     const memberPageFourthImg = slideWrap.children[4].children[0];
     memberPageFourthImg.alt = `사진_${members[3]["memberNumber"]}번_멤버`;
     memberPageFourthImg.style.border = "1px solid black";
-    memberPageFourthImg.style.backgroundColor = "lightgray";
+    memberPageFourthImg.style.backgroundColor = "#ccc";
     memberPageFourthImg.style.display = "block";
     memberPageFourthImg.style.width = "300px";
     memberPageFourthImg.style.height = "100%";
@@ -182,7 +182,7 @@
     const memberPageFifthImg = slideWrap.children[5].children[0];
     memberPageFifthImg.alt = `사진_${members[4]["memberNumber"]}번_멤버`;
     memberPageFifthImg.style.border = "1px solid black";
-    memberPageFifthImg.style.backgroundColor = "lightgray";
+    memberPageFifthImg.style.backgroundColor = "#ccc";
     memberPageFifthImg.style.display = "block";
     memberPageFifthImg.style.width = "300px";
     memberPageFifthImg.style.height = "100%";
@@ -236,7 +236,7 @@
       memberList.children[i].children[0].style.width = "250px";
       memberList.children[i].children[0].style.height = "250px";
       memberList.children[i].children[0].style.border = "1px solid black";
-      memberList.children[i].children[0].style.backgroundColor = "lightgray";
+      memberList.children[i].children[0].style.backgroundColor = "#ccc";
 
       memberList.children[i].children[1].style.width = "250px";
       memberList.children[i].children[1].style.height = "100px";
@@ -255,9 +255,30 @@
         root.children[1].children[5].style.position = "absolute";
         root.children[1].children[5].style.top = "0px";
         root.children[1].children[5].style.left = "0px";
+        console.log(i);
+        makeMemberList(root.children[1].children[5], i);
       });
     }
 
+    function makeMemberList(parent, memberNum){
+      makeTag("img", "", "", parent);
+      parent.style.display = "flex";
+  
+      // const memberPageFirstImg = parent.children[memberNum];
+      // memberPageFirstImg.alt = `사진_${members[0]["memberNumber"]}번_멤버`;
+      // memberPageFirstImg.style.border = "1px solid black";
+      // memberPageFirstImg.style.backgroundColor = "#ccc";
+      // memberPageFirstImg.style.display = "block";
+      // memberPageFirstImg.style.width = "300px";
+      // memberPageFirstImg.style.height = "100%";
+  
+      makeTag("div", "", "", parent);
+      makeTag("p", `${members[memberNum]["name"]} ${members[memberNum]["teamPosition"]}`, "", parent.children[1]);
+      makeTag("p", `이메일 : ${members[memberNum]["emailAddress"]}`, "", parent.children[1]);
+      makeTag("p", `gitHub : ${members[memberNum]["githubAddress"]}`, "", parent.children[1]);
+      makeTag("p", `한마디 : ${members[memberNum]["word"]}`, "", parent.children[1]);
+      parent.children[1].style.paddingLeft = "10px";
+    }
     
 
 
