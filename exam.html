@@ -100,11 +100,14 @@
     // 슬라이드 멤버 이미지 부분 스타일링
     const memberImgStyleObj = {
       border: "1px solid black",
-      backgroundColor: "#ccc",
+      // backgroundColor: "#ccc",
       display: "block",
       width: "300px",
       height: "100%",
+      backgroundColor: ["white", "lightskyblue", "lightgray", "lightgreen", "lightpink", "salmon"],
     };
+    console.dir(memberImgStyleObj["backgroundColor"]);
+
 
     let getmemberImgStyle = [];
     for(key in memberImgStyleObj) {
@@ -146,6 +149,7 @@
           slideWrap.children[i].style.transition = "1s";
       }
       slideWrap.children[slideWrap.children.length - slideCount].style.opacity = "1";
+      slideWrap.children[slideWrap.children.length - slideCount].style.backgroundColor = memberImgStyleObj["backgroundColor"][slideCount];
       slideCount = slideCount - 1;
       if(slideCount === 0) {
         slideCount = slideWrap.children.length;
@@ -255,12 +259,13 @@
           root.children[1].children[5].style[getmodalStyle[j]] = modalClickBtn[getmodalStyle[j]];
         }
         // 모달창 안의 자식 요소 생성 함수
-        modalCloseBtn(root.children[1].children[5], i);
+        modalBtn(root.children[1].children[5], i);
       });
     }
 
     // 모달창 생성 함수
-    function modalCloseBtn(parent, memberNum){
+    function modalBtn(parent, memberNum){
+      // 닫기버튼 생성
       makeTag("button", "", "", parent);
       parent.children[0].textContent = "X";
       parent.children[0].style.position = "absolute";
@@ -271,12 +276,33 @@
         this.parentElement.remove();
       })
   
+      // 모달창 내부 구현
       makeTag("div", "", "", parent);
       makeTag("p", `${members[memberNum]["name"]} ${members[memberNum]["teamPosition"]}`, "", parent.children[1]);
       makeTag("p", `이메일 : ${members[memberNum]["emailAddress"]}`, "", parent.children[1]);
       makeTag("p", `gitHub : ${members[memberNum]["githubAddress"]}`, "", parent.children[1]);
       makeTag("p", `한마디 : ${members[memberNum]["word"]}`, "", parent.children[1]);
-      parent.children[1].style.paddingLeft = "10px";
+      parent.children[1].style.padding = "80px";
+
+      // 다음 멤버 모달창
+      makeTag("button", "", "", parent);
+      parent.children[2].style.position = "absolute";
+      parent.children[2].style.top = "47%";
+      parent.children[2].style.right = "1%";
+      parent.children[2].textContent = ">";
+      parent.children[2].addEventListener('click', function() {
+        // this.parentElement.remove();
+      });
+
+      // 이전 멤버 모달창
+      makeTag("button", "", "", parent);
+      parent.children[3].style.position = "absolute";
+      parent.children[3].style.top = "47%";
+      parent.children[3].style.left = "1%";
+      parent.children[3].textContent = "<";
+      parent.children[3].addEventListener('click', function() {
+        // this.parentElement.remove();
+      });
     }
     
     // 훈련과정 영역 요소 생성
